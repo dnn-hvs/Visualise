@@ -1,7 +1,7 @@
 import utils.read_matfiles as utility
 import matplotlib.pyplot as plt
 import matplotlib.image as image
-import visualise
+# import visualise
 
 import numpy as np
 
@@ -51,10 +51,10 @@ def plot(rdms, ind, image_set, images_dir, file_name, model_path, num):
         plt.yticks([])
         plt.show()
 
-        visualise.visualise_cnn(model_name, img1, "arabian camel",
-                                model_path=model_path)
-        visualise.visualise_cnn(model_name, img2, "orange",
-                                model_path=model_path)
+        # visualise.visualise_cnn(model_name, img1, "arabian camel",
+        #                         model_path=model_path)
+        # visualise.visualise_cnn(model_name, img2, "orange",
+        #                         model_path=model_path)
 
 
 def sim_dissim_indices(rdms, num):
@@ -76,10 +76,12 @@ def _investigate(image_set, rdms, file_name, model_path, num, dissimilar):
         "_Image_Set/"+image_set+"images/image_"
     subject_early_rdm = rdms
     min_ind, max_ind = sim_dissim_indices(subject_early_rdm, num)
-    plot(subject_early_rdm, min_ind, image_set,
-         images_dir, file_name, model_path, num)
+
     if dissimilar:
         plot(subject_early_rdm, max_ind, image_set,
+             images_dir, file_name, model_path, num)
+    else:
+        plot(subject_early_rdm, min_ind, image_set,
              images_dir, file_name, model_path, num)
 
 
