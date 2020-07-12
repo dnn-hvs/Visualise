@@ -15,7 +15,7 @@ meg_keys = ["MEG_RDMs_early", "MEG_RDMs_late"]
 
 
 def get_image_num(image_num, image_set):
-    if image_set == "92":
+    if image_set == "92" or image_set == "78":
         return str(
             image_num) if image_num > 9 else "0"+str(image_num)
     else:
@@ -72,8 +72,12 @@ def sim_dissim_indices(rdms, num):
 
 
 def _investigate(image_set, rdms, file_name, model_path, num, dissimilar):
-    images_dir = "../data/Training_Data/"+image_set + \
-        "_Image_Set/"+image_set+"images/image_"
+
+    if "78" in file_name:
+        images_dir = "../data/Test_Data/78images/image_"
+    else:
+        images_dir = "../data/Training_Data/"+image_set + \
+            "_Image_Set/"+image_set+"images/image_"
     subject_early_rdm = rdms
     min_ind, max_ind = sim_dissim_indices(subject_early_rdm, num)
 
@@ -90,8 +94,10 @@ def fmri_investigation(num, model_path, file_names=fmri_files, dissimilar=False)
         print("File Name: ", file_name)
         if "92" in file_name:
             image_set = "92"
-        else:
+        elif "118" in file_name:
             image_set = "118"
+        else:
+            image_set = "78"
         rdms_dict = utility.load(file_name)
         print(("+"*30+"RDMs : Image Set :: {}"+"+"*30).format(image_set))
         _investigate(
